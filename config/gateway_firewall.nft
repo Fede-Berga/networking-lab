@@ -1,0 +1,53 @@
+#!/usr/sbin/nft -f
+
+# config/gateway_firewall.nft
+# Configurazione per il Router (VLAN Trunk + NAT)
+
+flush ruleset
+
+table inet filter {
+    chain input {
+        type filter hook input priority 0; policy drop;
+        ct state established,related accept
+        iif lo accept
+        ip protocol icmp accept
+    }
+
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+
+        # Permetti traffico di ritorno (fondamentale per internet)
+        ct state established,related accept
+
+        # 1. Accesso Web (Esterno -> VLAN 10)
+        iifname "eth0" oifname "eth1.10" tcp dport 80 accept
+
+        # 2. Accesso Database (VLAN 10 -> VLAN 30)
+        iifname "eth1.10" oifname "eth1.30" tcp dport 5432 accept
+
+        # 3. Accesso Amministrativo (VLAN 20 -> Anywhere)
+        iifname "eth1.20" accept
+
+        # 4. Accesso Internet (VLAN 10, 20 -> Esterno)
+        # Permettiamo esplicitamente a DMZ e Workstation di uscire su eth0
+        iifname "eth1.10" oifname "eth0" accept
+        iifname "eth1.20" oifname "eth0" accept
+        
+        # NOTA: La VLAN 30 (Database) non ha una regola per oifname "eth0"
+        # Quindi verrà bloccata dalla policy DROP di default.
+    }
+
+    chain output {
+        type filter hook output priority 0; policy accept;
+    }
+}
+
+# Configurazione NAT
+table ip nat {
+    chain postrouting {
+        type nat hook postrouting priority 100; policy accept;
+        
+        # SNAT/MASQUERADE per il traffico che esce su eth0
+        oifname "eth0" masquerade
+    }
+}
