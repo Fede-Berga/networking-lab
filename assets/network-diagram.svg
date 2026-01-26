@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <!-- Glow Filters -->
+    <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-purple" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-white" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradients -->
+    <linearGradient id="trunk-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1" />
+    </linearGradient>
+    
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#050510;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#101025;stop-opacity:1" />
+    </linearGradient>
+
+    <pattern id="circuit" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M10 10 L40 10 M10 40 L40 40 M25 10 L25 40" stroke="#1f293a" stroke-width="1" fill="none"/>
+      <circle cx="25" cy="25" r="2" fill="#1f293a"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-grad)" rx="15"/>
+  <rect width="800" height="500" fill="url(#circuit)" opacity="0.3"/>
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="'Courier New', monospace" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="4" opacity="0.7">NET_SEGMENTATION_LAB</text>
+
+  <!-- The "Core" (Router/Switch) -->
+  <g transform="translate(400, 150)">
+    <!-- Central Crystal/Prism -->
+    <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="#1a1b26" stroke="#ffffff" stroke-width="2" filter="url(#glow-white)"/>
+    <circle cx="0" cy="0" r="15" fill="#ffffff" filter="url(#glow-white)"/>
+    
+    <!-- Incoming Trunk Beam -->
+    <path d="M 0 -150 L 0 -45" stroke="url(#trunk-grad)" stroke-width="6" stroke-dasharray="10,5"/>
+    <text x="15" y="-90" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.8">TRUNK STREAM</text>
+  </g>
+
+  <!-- VLAN 10: DMZ (Cyan) -->
+  <g filter="url(#glow-blue)">
+    <!-- Path -->
+    <path d="M 400 170 C 400 250, 150 200, 150 350" fill="none" stroke="#00f3ff" stroke-width="3"/>
+    <!-- Node -->
+    <g transform="translate(150, 350)">
+      <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="#003336" stroke="#00f3ff" stroke-width="2"/>
+      <text x="0" y="5" font-family="monospace" font-size="12" fill="#00f3ff" text-anchor="middle" font-weight="bold">DMZ</text>
+      <text x="0" y="20" font-family="monospace" font-size="9" fill="#00f3ff" text-anchor="middle" opacity="0.7">WEB.10</text>
+    </g>
+    <!-- Moving Packet (Static representation) -->
+    <circle cx="275" cy="215" r="4" fill="#ffffff"/>
+  </g>
+
+  <!-- VLAN 20: INTERNAL (Green) -->
+  <g filter="url(#glow-green)">
+    <!-- Path -->
+    <path d="M 400 170 C 400 280, 400 280, 400 350" fill="none" stroke="#00ff9d" stroke-width="3"/>
+    <!-- Node -->
+    <g transform="translate(400, 350)">
+      <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="#003622" stroke="#00ff9d" stroke-width="2"/>
+      <text x="0" y="5" font-family="monospace" font-size="12" fill="#00ff9d" text-anchor="middle" font-weight="bold">INT</text>
+      <text x="0" y="20" font-family="monospace" font-size="9" fill="#00ff9d" text-anchor="middle" opacity="0.7">WORK.20</text>
+    </g>
+    <!-- Moving Packet -->
+    <circle cx="400" cy="260" r="4" fill="#ffffff"/>
+  </g>
+
+  <!-- VLAN 30: DATABASE (Purple) -->
+  <g filter="url(#glow-purple)">
+    <!-- Path -->
+    <path d="M 400 170 C 400 250, 650 200, 650 350" fill="none" stroke="#bd00ff" stroke-width="3"/>
+    <!-- Node -->
+    <g transform="translate(650, 350)">
+      <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" fill="#2d003d" stroke="#bd00ff" stroke-width="2"/>
+      <text x="0" y="5" font-family="monospace" font-size="12" fill="#bd00ff" text-anchor="middle" font-weight="bold">DB</text>
+      <text x="0" y="20" font-family="monospace" font-size="9" fill="#bd00ff" text-anchor="middle" opacity="0.7">DATA.30</text>
+    </g>
+    <!-- Moving Packet -->
+    <circle cx="525" cy="215" r="4" fill="#ffffff"/>
+  </g>
+  
+  <!-- Decorative Elements -->
+  <circle cx="100" cy="100" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="700" cy="80" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="50" cy="400" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="750" cy="450" r="1" fill="#ffffff" opacity="0.5"/>
+
+</svg>
