@@ -108,7 +108,7 @@ Once the lab is running:
     ```bash
     sudo bash scripts/cleanup.sh
     ```
-    The script starts with `incus stop --all`, which stops every running instance in the current Incus project, not only the lab's.
+    The script starts with `incus stop --all`, which stops every running instance in the current Incus project, not only the lab's. It does not delete `db-net`, the database network of Part 1: if you stop after Part 1, remove it with `incus network delete db-net`.
 
 ## Project Structure
 
