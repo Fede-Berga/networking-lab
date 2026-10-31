@@ -129,4 +129,7 @@ Once the lab is running:
 
 ## 📜 License
 
-Distributed under the MIT License.
+The code and the lesson material are licensed separately:
+
+*   The lesson material ([`lesson-plan.md`](lesson-plan.md) and the diagram in [`assets/`](assets/)) is licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), see [`LICENSE-docs`](LICENSE-docs). You can reuse and adapt it, also in your own classes, as long as you credit Federico Bergamini.
+*   Everything else, including the code in `app/`, `config/` and `scripts/`, is released under the [MIT License](LICENSE).
