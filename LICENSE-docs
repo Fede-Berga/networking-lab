@@ -1,0 +1,24 @@
+Lesson material license
+
+Copyright (c) 2026 Federico Bergamini
+
+The lesson material in this repository is licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+This applies to:
+
+- lesson-plan.md (the step-by-step lesson plan, in Italian)
+- assets/network-diagram.svg (the network diagram)
+
+You may share and adapt this material for any purpose, including in your own
+classes, as long as you credit Federico Bergamini as the author, link to the
+license and indicate whether you made changes. The full legal code is at
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Suggested attribution:
+"Networking Lab: From Bridges to VLANs" by Federico Bergamini
+(https://github.com/Fede-Berga/networking-lab), licensed under CC BY 4.0.
+
+All other files, including the code in app/, config/ and scripts/, are
+licensed under the MIT License (see LICENSE).
